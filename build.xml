@@ -12,7 +12,7 @@
     <property name="src.dir" value="src"/>
     <property name="classes.dir" value="bin"/>
     <property name="output.dir" value="out"/>
-    <property name="jarname" value="mytool.jar"/>
+    <property name="jarname" value="mytoolnew.jar"/>
 	<property name="doc.dir" value="doc" />
 	<property name="docjarname" value="mytool-javadoc.jar"/>
 	<property name="sourcesjarname" value="mytool-sources.jar"/>
