@@ -12,7 +12,7 @@ import java.util.Map;
 import org.click.lib.sort.SortStrArray;
 import org.click.lib.string.SSO;
 
-public class Format {
+public abstract class Format {
 
 	public static int ngramLimit = 7;
 
@@ -22,39 +22,8 @@ public class Format {
 	// start from 1
 	HashMap<String, Integer> labelDict = new HashMap<String, Integer>();
 
-	public List<WORD> processLine(String words) {
-		
-		String[] tokens = words.split(";");
-
-		String token = "", key = "", value = "";
-
-		if (tokens == null) {
-			return null;
-		}
-
-		List<WORD> wordList = new ArrayList<WORD>();
-		WORD word = null;
-
-		for (int j = 0; j < tokens.length; j++) {
-
-			token = tokens[j];
-			if (SSO.tioe(token) || token.trim().equals("-")) {
-				continue;
-			}
-
-			if (token.split(":").length != 2) {
-				continue;
-			}
-
-			key = token.split(":")[0].trim();
-			value = token.split(":")[1].trim();
-			word = new WORD(key, Double.parseDouble(value));
-			wordList.add(word);
-		}
-
-		return wordList;
-	}
-
+	public abstract List<WORD> processLine(String words);
+	
 	/**
 	 * build dicts train file,including word dict and label dict
 	 * 
@@ -135,13 +104,10 @@ public class Format {
 			BufferedReader br = new BufferedReader(new FileReader(preprocess));
 
 			String label = "", words = "", line = "";
-
 			String[] fields = null;
 			String[] tokens = null;
-
 			ArrayList<String> doc = null;
 			HashMap<String, Integer> docMap = null;
-
 			int iter = 0;
 			List<WORD> wordList = null;
 			WORD word = null;

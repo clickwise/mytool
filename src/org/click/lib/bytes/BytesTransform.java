@@ -3,9 +3,14 @@ package org.click.lib.bytes;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 
-//byte 数组转换成各种类型的数据
+//byte array into various values
 public class BytesTransform {
 
+	/**
+	 * byte array convert to int
+	 * @param b
+	 * @return
+	 */
 	public static int byteToInt2(byte[] b) {
 
 		int i = 0;
@@ -23,6 +28,11 @@ public class BytesTransform {
 		return i;
 	}
 
+	/**
+	 * byte array convert to int another version
+	 * @param b
+	 * @return
+	 */
 	public static int byteToIntv(byte[] b) {
 
 		int mask = 0xff;
@@ -38,6 +48,11 @@ public class BytesTransform {
 
 	}
 
+	/**
+	 * byte array convert to string
+	 * @param b
+	 * @return
+	 */
 	public static String bytes2str(byte[] b) {
 		String str = "";
 		for (int i = 0; i < b.length; i++) {
@@ -52,8 +67,7 @@ public class BytesTransform {
 	}
 
 	/**
-	 * 补全byte数组至四个字节 不足4个字节的应该从低字节开始置0
-	 * 
+	 * complete bytes to four bytes, bytes not reach four bytes is set to 0 from low end
 	 * @param b
 	 * @return
 	 */
@@ -70,10 +84,6 @@ public class BytesTransform {
 		return cb;
 	}
 
-	/*
-	 * public static int byteArrayToInt(byte[] b, int offset) { int value= 0;
-	 * for (int i = 0; i < 4; i++) { int shift= (4 - 1 - i) * 8; value +=(b[i +
-	 * offset] & 0x000000FF) << shift;//往高位游 } return value; }
-	 */
+
 
 }

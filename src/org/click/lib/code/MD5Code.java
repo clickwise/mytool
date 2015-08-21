@@ -6,6 +6,11 @@ import java.security.NoSuchAlgorithmException;
 
 public class MD5Code {
 	
+	/**
+	 * convert a string to md5 string,composed of 32 chars
+	 * @param plainText
+	 * @return
+	 */
 	public static String Md5(String plainText) {
 		String md5Text="";
 		try {
@@ -58,7 +63,7 @@ public class MD5Code {
 	public static void main(String[] args)
 	{
 		String plainText="游戏";
-		System.out.println(MD5Code.Md5(plainText));
+		System.out.println(MD5Code.Md5(plainText).length());
 		System.out.println(MD5Code.makeMD5(plainText));
 	}
 }
