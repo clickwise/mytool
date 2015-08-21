@@ -7,7 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Simple Str Operation 简单的字符串处理类
+ * Simple Str Operation
  * 
  * @author lq
  * 
@@ -15,8 +15,7 @@ import java.util.regex.Pattern;
 public class SSO {
 
 	/**
-	 * 测试字符串是否为null或空,,若不为null且不为空返回true
-	 * 
+	 * test the string is null or empty,if not null and not empty return true
 	 * @param str
 	 * @return istnoe
 	 */
@@ -30,7 +29,7 @@ public class SSO {
 	}
 
 	/**
-	 * 测试字符串是否为null或空,,若为null或为空返回true
+     * test the string is null or empty,if  null or empty return true
 	 * 
 	 * @param str
 	 * @return istnoe
@@ -77,7 +76,7 @@ public class SSO {
 	}
 
 	/**
-	 * 取str之前的字符串,不包括str
+	 * trunk substr before str,not including str
 	 * 
 	 * @param str
 	 * @return
@@ -96,7 +95,7 @@ public class SSO {
 	}
 
 	/**
-	 * 取str之后的字符串,不包括str
+	 * trunk substr after str,not including str
 	 * 
 	 * @param str
 	 * @return
@@ -116,7 +115,7 @@ public class SSO {
 	}
 
 	/**
-	 * 截断str之后的字符串，包括str
+	 * trunk substr after str,including str
 	 * 
 	 * @param source
 	 * @param str
@@ -133,7 +132,7 @@ public class SSO {
 	}
 
 	/**
-	 * 截断str之前的字符串，包括str
+	 * trunk substr before str,including str
 	 * 
 	 * @param source
 	 * @param str
@@ -151,8 +150,7 @@ public class SSO {
 	}
 
 	/**
-	 * 返回str1,str2中间的字符串，不包括str1,str2(str1 第一次出现，str2 最后一次出现)
-	 * 
+	 * return substr between str1,str2,not including str1,str2(str1 first occurrence,str2 last occurrence)
 	 * @param source
 	 * @param str1
 	 * @param str2
@@ -188,7 +186,7 @@ public class SSO {
 	}
 	
 	/**
-	 * 返回str1,str2中间的字符串，不包括str1,str2(str1 第一次出现，str2 第一次出现)
+	 * return substr between str1,str2,not including str1,str2(str1 first occurrence,str2 first occurrence)
 	 * 
 	 * @param source
 	 * @param str1
@@ -235,8 +233,7 @@ public class SSO {
 	}
 
 	/**
-	 * 将source最后出现的find 替换为replace
-	 * 
+	 * replace 'find' in source by 'replace'
 	 * @param source
 	 * @param find
 	 * @param replace
