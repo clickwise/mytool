@@ -19,8 +19,11 @@ public abstract class Format {
 	// start from 1
 	HashMap<String, Integer> wordDict = new HashMap<String, Integer>();
 
-	// start from 1
+	// start from 1 label->index
 	HashMap<String, Integer> labelDict = new HashMap<String, Integer>();
+	
+	// index->label
+	HashMap<Integer, String> labelIndex = new HashMap<Integer, String>();
 
 	public abstract List<WORD> processLine(String words);
 
@@ -230,6 +233,7 @@ public abstract class Format {
 				}
 
 				labelDict.put(key, value);
+				labelIndex.put(value, key);
 			}
 
 			lbr.close();
@@ -338,7 +342,7 @@ public abstract class Format {
 	 * @param preprocess
 	 * @param format
 	 */
-	public String genLineSample(String line, String format) {
+	public String genLineSample(String line) {
 
 		String label = "", words = "";
 
