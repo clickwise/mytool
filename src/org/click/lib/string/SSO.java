@@ -339,6 +339,12 @@ public class SSO {
 		responseArr[1] = responseSplitVal;
 		return responseArr;
 	}
+	
+	/**
+	 * ngram ,at least two char
+	 * @param word
+	 * @return
+	 */
     public static ArrayList<String> ngram(String word)
     {
  
@@ -360,6 +366,41 @@ public class SSO {
     	for(i=0;i<=(word.length()-2);i++)
     	{
     		for(j=i+2;j<=word.length();j++)
+    		{
+    			gram=word.substring(i,j);
+    			ngrams.add(gram);
+    		}
+    	}
+    	
+    	return ngrams;
+    }
+    
+	/**
+	 * ngram ,at least bottom char
+	 * @param word
+	 * @return
+	 */
+    public static ArrayList<String> ngram(String word,int bottom)
+    {
+ 
+    	ArrayList<String> ngrams=new ArrayList<String>();
+       	if(word.length()<=bottom)
+    	{
+    	  ngrams.add(word);
+    	  return ngrams;
+    	}
+       	
+    	if ((Pattern.matches("[a-zA-Z%0-9\\\\\\\\_\\.]*", word))) {
+      	    ngrams.add(word);
+      	    return ngrams;
+		}
+       	
+    	int i=0;
+    	int j=2;
+    	String gram="";
+    	for(i=0;i<=(word.length()-bottom);i++)
+    	{
+    		for(j=i+bottom;j<=word.length();j++)
     		{
     			gram=word.substring(i,j);
     			ngrams.add(gram);

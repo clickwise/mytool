@@ -29,6 +29,13 @@ public class TimeOpera {
 		
 	  return 0;
 	}
+	
+	/**
+	 * from format:yyyy-MM-dd HH:mm:ss
+	 * to long
+	 * @param str
+	 * @return
+	 */
 	public static long str2long(String str)
 	{
 		SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -48,6 +55,7 @@ public class TimeOpera {
 				
 		return dt.getTime();
 	}
+	
 	
 	public static String long2strm(long tl)
 	{
@@ -132,8 +140,6 @@ public class TimeOpera {
 		return Integer.parseInt(sdf.format(dt));
 	}
 	
-	
-
 	
 	/**
 	 * 获得当前日期，格式20140626

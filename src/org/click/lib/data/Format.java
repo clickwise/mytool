@@ -23,7 +23,7 @@ public abstract class Format {
 	HashMap<String, Integer> labelDict = new HashMap<String, Integer>();
 
 	public abstract List<WORD> processLine(String words);
-	
+
 	/**
 	 * build dicts train file,including word dict and label dict
 	 * 
@@ -240,7 +240,7 @@ public abstract class Format {
 	}
 
 	/**
-	 * convert to sample
+	 * convert preprocess file to sample
 	 * 
 	 * @param preprocess
 	 * @param format
@@ -329,6 +329,76 @@ public abstract class Format {
 		} catch (Exception e) {
 
 		}
+
+	}
+
+	/**
+	 * convert preprocess file to sample
+	 * 
+	 * @param preprocess
+	 * @param format
+	 */
+	public String genLineSample(String line, String format) {
+
+		String label = "", words = "";
+
+		String[] fields = null;
+		String[] tokens = null;
+
+		int labelIndex;
+		int wordIndex;
+		ArrayList<String> wordSimpleList = null;
+
+		String[] sortArr = null;
+
+		String formatLine = "";
+
+	
+		List<WORD> wordList = null;
+		WORD word = null;
+
+		if (SSO.tioe(line)) {
+			return "";
+		}
+
+
+		fields = line.split("\001");
+
+		if (fields.length != 2) {
+			return "";
+		}
+
+		label = fields[0].trim();
+		words = fields[1];
+
+		wordList = processLine(words);
+
+		labelIndex = 0;
+		labelIndex = labelDict.get(label);
+		if (labelIndex < 1) {
+			return "";
+		}
+		formatLine = labelIndex + " ";
+
+		wordSimpleList = new ArrayList<String>();
+		for (int k = 0; k < wordList.size(); k++) {
+			word = wordList.get(k);
+			if (wordDict.containsKey(word.key)) {
+				wordIndex = wordDict.get(word.key);
+				wordSimpleList.add(wordIndex + "\001" + word.value);
+			}
+		}
+
+		sortArr = SortStrArray.sort_List(wordSimpleList, 0, "int", 2, "\001");
+
+		for (int k = sortArr.length - 1; k >= 0; k--) {
+			formatLine += (sortArr[k].split("\001")[0] + ":"
+					+ sortArr[k].split("\001")[1] + " ");
+		}
+
+		formatLine = formatLine.trim();
+
+		return formatLine;
 
 	}
 
