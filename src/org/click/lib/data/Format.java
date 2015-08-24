@@ -66,6 +66,11 @@ public abstract class Format {
 
 				wordList = processLine(words);
 
+				if(wordList==null)
+				{
+					continue;
+				}
+				
 				for (int s = 0; s < wordList.size(); s++) {
 
 					word = wordList.get(s);
@@ -296,6 +301,11 @@ public abstract class Format {
 
 				wordList = processLine(words);
 
+				if(wordList==null)
+				{
+					continue;
+				}
+				
 				labelIndex = 0;
 				labelIndex = labelDict.get(label);
 				if (labelIndex < 1) {
@@ -389,6 +399,68 @@ public abstract class Format {
 
 	}
 
+	/**
+	 * confuse the input, consume a lot of memory
+	 * @param input
+	 * @param output
+	 */
+	public void random(String input,String output)
+	{
+		try{
+			
+			ArrayList<String> list=new ArrayList<String>();
+			
+			BufferedReader br=new BufferedReader(new FileReader(input));
+			PrintWriter pw=new PrintWriter(output);
+
+			String line="";
+			
+			while((line=br.readLine())!=null)
+			{
+				if(SSO.tioe(line))
+				{
+					continue;
+				}
+				
+				line=line.trim();
+				list.add(line);
+			}
+			
+			br.close();
+			
+			for(int i=0;i<list.size();i++)
+			{
+				swap(list);
+			}
+			
+			for(int i=0;i<list.size();i++)
+			{
+				pw.println(list.get(i));
+			}
+			
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void swap(ArrayList<String> list)
+	{
+	    int firstId=0;
+	    int secondId=0;
+	    
+	    firstId=(int)(Math.random()*(list.size()-1));
+	    secondId=(int)(Math.random()*(list.size()-1));
+	    
+	    String first=list.get(firstId);
+	    String second=list.get(secondId);
+	    
+	    list.set(firstId, second);
+	    list.set(secondId, first);
+	}
+	
 	/**
 	 * convert to sample (train and test)
 	 * 
