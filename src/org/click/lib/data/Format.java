@@ -17,13 +17,13 @@ public abstract class Format {
 	public static int ngramLimit = 7;
 
 	// start from 1
-	HashMap<String, Integer> wordDict = new HashMap<String, Integer>();
+	public HashMap<String, Integer> wordDict = new HashMap<String, Integer>();
 
 	// start from 1 label->index
-	HashMap<String, Integer> labelDict = new HashMap<String, Integer>();
+	public HashMap<String, Integer> labelDict = new HashMap<String, Integer>();
 	
 	// index->label
-	HashMap<Integer, String> labelIndex = new HashMap<Integer, String>();
+	public HashMap<Integer, String> labelIndex = new HashMap<Integer, String>();
 
 	public abstract List<WORD> processLine(String words);
 
@@ -344,11 +344,6 @@ public abstract class Format {
 	 */
 	public String genLineSample(String line) {
 
-		String label = "", words = "";
-
-		String[] fields = null;
-		String[] tokens = null;
-
 		int labelIndex;
 		int wordIndex;
 		ArrayList<String> wordSimpleList = null;
@@ -366,22 +361,10 @@ public abstract class Format {
 		}
 
 
-		fields = line.split("\001");
+		wordList = processLine(line);
 
-		if (fields.length != 2) {
-			return "";
-		}
+		labelIndex = -1;
 
-		label = fields[0].trim();
-		words = fields[1];
-
-		wordList = processLine(words);
-
-		labelIndex = 0;
-		labelIndex = labelDict.get(label);
-		if (labelIndex < 1) {
-			return "";
-		}
 		formatLine = labelIndex + " ";
 
 		wordSimpleList = new ArrayList<String>();
