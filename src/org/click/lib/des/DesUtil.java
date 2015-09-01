@@ -17,11 +17,16 @@ public class DesUtil {
     private final static String DES = "DES";
  
     public static void main(String[] args) throws Exception {
-        String data = "测试 456 一下 子";
+        String data = "1 4:0.5 6:1.0 7:0.25 34:0.25 37:0.25 39:1.0 76:0.5 106:0.155 109:0.06 110:0.06 111:0.06 112:0.155 113:0.25 114:0.25 115:0.25 116:0.5 117:0.5";
         String key = "wang!@#$%";
-        System.err.println(encrypt(data, key));
-        System.err.println(decrypt(encrypt(data, key), key));
- 
+        
+       
+        String encode=encrypt(data, key);
+        encode=encode.replaceAll("\\s+", "");
+        System.err.println("encode:"+encode);
+        
+        //System.err.println(decrypt(encrypt(data, key), key));
+        System.err.println(decrypt(encode, key));
     }
      
     /**
