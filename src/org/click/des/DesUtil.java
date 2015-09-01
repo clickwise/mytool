@@ -16,29 +16,6 @@ public class DesUtil {
 	private final static String DES = "DES";
 
 
-	public static String encode(String data) {
-		String key = "wang!@#$%";
-		String encode = "";
-		try {
-			encode = encrypt(data, key);
-		} catch (Exception e) {
-
-		}
-		encode = encode.replaceAll("\\s+", "");
-		return encode;
-	}
-
-	public static String decode(String data) {
-		String key = "wang!@#$%";
-		String decode = "";
-		try {
-			decode = decrypt(data, key);
-		} catch (Exception e) {
-
-		}
-		return decode;
-	}
-
 	/**
 	 * Description 根据键值进行加密
 	 * 
