@@ -3,6 +3,9 @@ package org.click.lib.string;
 
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -409,6 +412,125 @@ public class SSO {
     	
     	return ngrams;
     }
+    
+    public static String fm_tag(String tagWords)
+    {
+    	if(tagWords==null||tagWords.trim().equals(""))
+		{
+			return "";
+		}
+		
+    	tagWords=tagWords.trim();
+    	
+    	String[] tokens=tagWords.split("\\s+");
+    	
+    	String token="",w="",tag="";
+    	
+        String blankWords="";
+        
+    	for(int i=0;i<tokens.length;i++)
+    	{
+    		token=tokens[i];
+    		w=token.substring(0, token.lastIndexOf("#"));
+    		tag=token.substring(token.lastIndexOf("#")+1,token.length());
+    		if(tag.equals("PU"))
+    		{
+    			w="PU";
+    		}
+    		
+    		blankWords+=(w+" ");
+    	}
+    	
+    	blankWords=blankWords.trim();
+    	
+    	String[] frags=blankWords.split("PU");
+    	
+    	String frag="";
+    	
+    	List<String> fm_list=null;
+    	
+    	HashMap<String,Integer> statWords=new HashMap<String,Integer>();
+    	
+    	String temp="";
+    	
+    	for(int i=0;i<frags.length;i++)
+    	{
+    	   frag=frags[i];
+    	   if(frag==null||frag.trim().equals(""))
+    	   {
+    		   continue;
+    	   }
+    	   
+    	   frag=frag.trim();
+    	   
+    	   fm_list=fm(frag);
+    	   
+    	   if(fm_list==null)
+    	   {
+    		   continue;
+    	   }
+    	   
+    	   for(int j=0;j<fm_list.size();j++)
+    	   {
+    	     temp=fm_list.get(j);
+    	     if(!(statWords.containsKey(temp)))
+    	     {
+    	    	 statWords.put(temp,1);
+    	     }
+    	     else
+    	     {
+    	    	 statWords.put(temp, statWords.get(temp)+1);
+    	     }
+    	   }
+    	   
+    	}
+   
+        String result="";
+        for(Map.Entry<String, Integer> entry:statWords.entrySet())
+        {
+        	result+=(entry.getKey()+":"+entry.getValue()+" ");
+        }
+       
+    	
+    	return result.trim();
+    }
+    
+	public static List<String> fm(String words)
+	{
+		if(words==null||words.trim().equals(""))
+		{
+			return null;
+		}
+		
+		words=words.trim();
+		
+		String fm_words="";
+		
+		String[] tokens=words.split("\\s+");
+		
+		String fm_word="";
+		
+		int concat=3;
+		
+		List<String> fm_list=new ArrayList<String>();
+		
+		for(int i=0;i<tokens.length;i++)
+		{
+			for(int j=i+1;j<=(i+concat)&&j<=tokens.length;j++)
+			{
+				fm_words="";
+				for(int k=i;k<j;k++)
+				{
+					fm_words+=tokens[k];
+				}
+				fm_list.add(fm_words);
+			
+			}
+		}
+		
+		
+		return fm_list;
+	}
 
 	public static void main(String[] args) {
 		/*
@@ -466,9 +588,16 @@ public class SSO {
 			System.out.println("i="+i+" "+list.get(i));
 		}
 		*/
-		String source="source:/tcref.php?src=http%3A%2F%2Fm.58.com%2Fnb%2Fsiji%2F&word=58%E5%90%8C%E5%9F%8E%E7%BD%91%E5%AE%81%E6%B3%A2%E6%8B%9B%E8%81%98%E5%8F%B8%E6%9C%BA&di=f5c40a80ed72d357201abef30200233b fi:57 li:51";
+		//String source="source:/tcref.php?src=http%3A%2F%2Fm.58.com%2Fnb%2Fsiji%2F&word=58%E5%90%8C%E5%9F%8E%E7%BD%91%E5%AE%81%E6%B3%A2%E6%8B%9B%E8%81%98%E5%8F%B8%E6%9C%BA&di=f5c40a80ed72d357201abef30200233b fi:57 li:51";
 		
-		System.out.println(SSO.midfstrs(source, "word=", "&"));
+		//System.out.println(SSO.midfstrs(source, "word=", "&"));
+		
+		String tagWords="祝勇#AD 。#PU 为#P 沈从文#NR 百年#VV 诞辰#NN 而#MSP 写#VV 的#DEC 专题#NN 散文#NN 。#PU /#PU 论#VV 史实#NN ，#PU 这#PN 书#NN 说#VV 得#DER 远#VA 不#AD 及#VV 《#PU 湖南#NR 凤凰#NR 》#PU 那#DT 一本#M 详实#NN 。#PU 书#NN 中#LC 很多#CD 文字#NN ，#PU 其实#AD 都#AD 可#VV 算作#VV 沈从文#NR 作品#NN 读后感#NN ；#PU 可是#AD 读后感#NN .#PU .#PU .#PU .#PU .#PU .#PU 我#PN 自己#PN 也#AD 会#VV 写#VV .#PU .#PU .#PU .#PU .#PU .#PU /#PU 这#DT 书#NN 唯一#JJ 的#DEG 亮#VA 点#AD 是#VC 陈渠珍#NR 和#CC 藏女西#NR 原#JJ 的#DEG 故事#NN ，#PU 传奇#VA 而#CC 深情#VA 。#PU 不过#AD 会#VV 有#VE 这样#PN 的#DEG 感觉#NN 是#VC 建立#VV 在#P 我#PN 此前#AD 未曾#AD 读#VV 过#AS 陈渠珍#NR 自己#PN 写#VV 的#DEC 《#PU 艽#NN 野#JJ 尘#NN 梦#NN 》#PU �#NN";
+		
+		//String  words="奎 因 和 阿加莎 克 里 斯蒂 的 书 读 起来 总 没有 福尔摩斯";
+		String fm_words=SSO.fm_tag(tagWords);
+		
+		System.err.println("fm_words:"+fm_words);
 		
 	}
 
